@@ -1,0 +1,35 @@
+plugins {
+    id("java")
+    id("org.jetbrains.intellij") version "1.5.2"
+}
+
+group = "com.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+}
+
+// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
+intellij {
+    // The installation path of Intellij IDEA on my local computer
+    localPath="D:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2022.1.3"
+    //version.set("2021.2")
+    type.set("IC") // Target IDE Platform
+    plugins = ['com.intellij.java']
+}
+
+tasks {
+    patchPluginXml {
+        sinceBuild.set("212")
+        untilBuild.set("222.*")
+    }
+}
+
+test {
+    // downloaded it from here https://github.com/JetBrains/intellij-community
+    systemProperty("idea.home.path", "E:\\intellij-community")
+    systemProperty("project.home", projectDir.getAbsolutePath())
+}
